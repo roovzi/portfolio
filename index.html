@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Portfolio | Java & Infrastructure</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* 2026 Modern Dark Theme */
+            --bg-body: #050505;
+            --bg-glass: rgba(20, 20, 20, 0.7);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            
+            /* Brand Colors */
+            --accent: #5e6ad2;       /* Blurple (Discord-ish) */
+            --accent-glow: rgba(94, 106, 210, 0.4);
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            
+            /* Syntax Colors */
+            --code-bg: #0d0d0d;
+            --syntax-key: #ff79c6;
+            --syntax-string: #f1fa8c;
+            --syntax-func: #8be9fd;
+            --syntax-comment: #6272a4;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-body);
+            background-image: radial-gradient(circle at 50% 0%, #1a1b26 0%, #050505 70%);
+            color: var(--text-main);
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 25px;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 { font-weight: 700; letter-spacing: -0.02em; }
+        
+        h1 { 
+            font-size: clamp(40px, 6vw, 72px); 
+            line-height: 1.1; 
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #a1a1aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 { 
+            font-size: 2rem; 
+            margin-bottom: 30px; 
+            display: flex; 
+            align-items: center; 
+            gap: 15px;
+        }
+
+        p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 20px; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* --- GLASS CARDS --- */
+        .glass-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
+        }
+
+        /* --- BADGES --- */
+        .featured-badge {
+            display: inline-block;
+            background: rgba(94, 106, 210, 0.15);
+            color: #8eaafb;
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 15px;
+            border: 1px solid rgba(94, 106, 210, 0.3);
+        }
+
+        /* --- CODE WINDOW --- */
+        .code-window {
+            background: var(--code-bg);
+            border-radius: 8px;
+            border: 1px solid #333;
+            overflow: hidden;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            margin-top: 20px;
+        }
+        .window-header {
+            background: #1a1a1a;
+            padding: 8px 15px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .code-body { padding: 20px; overflow-x: auto; white-space: pre; color: #e2e8f0; }
+        
+        /* Syntax Highlighting */
+        .k { color: var(--syntax-key); }     
+        .s { color: var(--syntax-string); }  
+        .f { color: var(--syntax-func); }   
+        .c { color: var(--syntax-comment); font-style: italic; }
+        .v { color: #bd93f9; }
+
+        /* --- BUTTONS --- */
+        .btn {
+            background: var(--text-main);
+            color: #000;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 20px;
+            transition: opacity 0.2s;
+        }
+        .btn:hover { opacity: 0.9; }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-glass);
+            color: var(--text-main);
+            margin-left: 10px;
+        }
+        .btn-outline:hover { border-color: var(--text-main); }
+
+        /* --- LAYOUT UTILS --- */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        @media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
+        
+        section { padding: 60px 0; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <section style="padding-top: 100px;">
+        <p class="mono" style="color: var(--accent);">Hello, my name is</p>
+        <h1>Ahmed Tauqeer.</h1>
+        <h1 style="color: var(--text-muted); font-size: clamp(30px, 4vw, 50px);">I bridge the gap between<br>Game & Infrastructure.</h1>
+        <p style="max-width: 600px; margin-top: 20px;">
+            Java Developer and Network Technologist. I specialize in linking Minecraft backends with external APIs, optimizing high-concurrency environments, and building competitive infrastructures.
+        </p>
+        <div>
+            <a href="mailto:ahmed.tauqeer.aamir@gmail.com" class="btn">Contact Me</a>
+            <a href="https://github.com/roovzi" class="btn btn-outline">GitHub</a>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="mono"><span style="color:var(--accent)">01.</span> Featured Project</h2>
+        
+        <div class="glass-card">
+            <div class="grid-2">
+                <div>
+                    <div class="featured-badge">JAVA + DISCORD API + SPIGOT</div>
+                    <h3>Celestial RBW Bridge</h3>
+                    <p>
+                        Communication is the lifeline of a ranked community. I got tired of players missing announcements or staff missing alerts because they weren't alt-tabbed.
+                    </p>
+                    <p>
+                        I architected <strong>Celestial RBW</strong>, a custom bridge plugin that unifies the Minecraft Server and Discord in real-time. It doesn't just pipe chat; it synchronizes Ranks (In-game ELO updates Discord Roles) and sends rich-embed match results instantly.
+                    </p>
+                    <ul class="mono" style="list-style: none; color: var(--text-muted); font-size: 0.9rem;">
+                        <li>▹ JDA (Java Discord API)</li>
+                        <li>▹ Asynchronous Webhooks</li>
+                        <li>▹ Role Synchronization</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <div class="code-window">
+                        <div class="window-header">
+                            <div class="dot" style="background:#ff5f56"></div>
+                            <div class="dot" style="background:#ffbd2e"></div>
+                            <div class="dot" style="background:#27c93f"></div>
+                            <span style="margin-left:auto; color: #666;">GameListener.java</span>
+                        </div>
+                        <div class="code-body">
+<span class="k">public void</span> <span class="f">onGameEnd</span>(GameEndEvent e) {
+    <span class="c">// Async execution to prevent server lag</span>
+    Bukkit.<span class="f">runTaskAsynchronously</span>(plugin, () -> {
+        
+        EmbedBuilder embed = <span class="k">new</span> <span class="f">EmbedBuilder</span>();
+        embed.<span class="f">setTitle</span>(<span class="s">"🏆 Match Results: "</span> + e.getArena());
+        embed.<span class="f">setColor</span>(Color.CYAN);
+        
+        <span class="c">// Send to Discord via JDA Bot Instance</span>
+        bot.<span class="f">getTextChannelById</span>(Config.RESULTS_ID)
+           .<span class="f">sendMessageEmbeds</span>(embed.build())
+           .<span class="f">queue</span>();
+    });
+}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="mono"><span style="color:var(--accent)">02.</span> Server Infrastructure</h2>
+        <div class="glass-card">
+            <div class="grid-2">
+                <div>
+                    <div class="featured-badge">OWNER & TECHNICIAN</div>
+                    <h3>[ASRBW] Infrastructure</h3>
+                    <p>
+                        My experience isn't theoretical. As the <strong>Owner and Lead Developer of [ASRBW]</strong>, I managed the entire lifecycle of a competitive network. 
+                    </p>
+                    <p>
+                        I was responsible for the distributed network architecture, using a Proxy system to ensure 99.9% availability. I personally handled the database integration, establishing asynchronous MySQL connections to sync user stats (ELO/MMR, Cosmetics) across multiple server instances in real-time.
+                    </p>
+                </div>
+                <div>
+                     <h4 class="mono" style="margin-bottom: 15px; color: var(--text-muted);">Key Achievements</h4>
+                     <ul style="list-style: none; color: var(--text-main);">
+                        <li style="margin-bottom: 10px;">✅ <strong>Performance:</strong> Tuned `server.properties` and JVM flags to maintain 20 TPS under high load.</li>
+                        <li style="margin-bottom: 10px;">✅ <strong>Development:</strong> Patched open-source plugin exploits and optimized API functionality.</li>
+                        <li style="margin-bottom: 10px;">✅ <strong>Live Ops:</strong> Managed community bug reports via Jira/Trello and deployed hotfixes via Git.</li>
+                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="mono"><span style="color:var(--accent)">03.</span> Competitive Integrity</h2>
+        <div class="glass-card">
+            <p>
+                In a Ranked environment like [ASRBW], a single cheater ruins the economy. I don't just "install" plugins; I configure them based on specific PvP mechanics.
+            </p>
+            <p class="mono" style="font-size: 0.9rem; color: var(--accent);">
+                Below is a snippet from my configuration. I set strict reach checks (3.01 blocks) to account for floating-point errors while ensuring fair play.
+            </p>
+
+            <div class="code-window">
+                <div class="window-header">
+                    <div class="dot" style="background:#ff5f56"></div>
+                    <div class="dot" style="background:#ffbd2e"></div>
+                    <div class="dot" style="background:#27c93f"></div>
+                    <span style="margin-left:auto; color: #666;">checks.yml</span>
+                </div>
+                <div class="code-body">
+<span class="k">combat:</span>
+  <span class="k">reach:</span>
+    <span class="k">enabled:</span> <span class="v">true</span>
+    <span class="c"># 3.01 allows for mathematical margin of error, but strictly bans 3.1+</span>
+    <span class="c"># Designed specifically for 1.8.9 PvP Mechanics</span>
+    <span class="k">max_reach:</span> <span class="v">3.01</span>
+    <span class="k">buffer_limit:</span> <span class="v">12</span>
+    <span class="k">actions:</span>
+      <span class="s">- "alert %player% flagged Reach (VL: %vl%)"</span>
+      <span class="s">- "cancel"</span>
+      
+  <span class="k">velocity:</span> <span class="c"># Anti-Knockback Configuration</span>
+    <span class="k">enabled:</span> <span class="v">true</span>
+    <span class="k">horizontal:</span> <span class="v">99.0</span> <span class="c"># Require 99% of vanilla knockback</span>
+    <span class="k">vertical:</span> <span class="v">99.0</span>
+    <span class="k">threshold:</span>
+      <span class="k">ban_vl:</span> <span class="v">20</span>
+      <span class="k">command:</span> <span class="s">"ban %player% &cUnfair Advantage [G]"</span></div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 50px 0; color: var(--text-muted); font-size: 0.9rem;">
+        <p class="mono">Built for Dev Application @ CraftiGames</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
